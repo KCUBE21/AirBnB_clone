@@ -60,53 +60,28 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, arg):
-    """
-    Creates a new instance of BaseModel,
-    saves it (to the JSON file) and prints
-    the id.
-    Ex: $ create BaseModel
-    """
+        """
+            Creates a new instance of BaseModel,
+            saves it (to the JSON file) and prints
+            the id.
+                Ex: $ create BaseModel
+        """
 
-    arg_lst = HBNBCommand.parse(arg)
-    if len(arg_lst) == 0:
-        print("** class name missing **")
-        return False
+        arg_lst = HBNBCommand.parse(arg)
+        if len(arg_lst) == 0:
+            print("** class name missing **")
+            return False
 
-    class_name = arg_lst[0]
-    if class_name not in HBNBCommand.__class_lst.keys():
-        print("** class doesn't exist **")
-        return False
+        if len(arg_lst) > 1:
+            print("** to many arguments **")
+            return False
 
-    # Extract parameters from arg_lst
-    params = {}
-    for item in arg_lst[1:]:
-        if "=" in item:
-            key, value = item.split("=", 1)
-            if value.startswith('"') and value.endswith('"'):
-                # Handle string value
-                value = value[1:-1]  # Remove surrounding quotes
-                value = value.replace("_", " ")  # Replace underscores with spaces
-                value = value.replace('\\"', '"')  # Unescape double quotes
-            elif "." in value:
-                # Handle float value
-                try:
-                    value = float(value)
-                except ValueError:
-                    continue  # Skip if cannot convert to float
-            else:
-                # Handle integer value
-                try:
-                    value = int(value)
-                except ValueError:
-                    continue  # Skip if cannot convert to integer
-
-            # Add parameter to params dictionary
-            params[key] = value
-
-    # Create instance of the specified class with parameters
-    new_obj = HBNBCommand.__class_lst[class_name](**params)
-    new_obj.save()
-    print(new_obj.id)
+        if (arg_lst[0] in HBNBCommand.__class_lst.keys()):
+            new_obj = HBNBCommand.__class_lst[arg_lst[0]]()
+            new_obj.save()
+            print(new_obj.id)
+        else:
+            print("** class doesn't exist **")
 
 
     def help_create(self):
