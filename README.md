@@ -116,3 +116,7 @@ $ ./console.py
 (hbnb)
 ```
 Test for initial commit
+
+#File lists individuals who contributed content to this repository.
+
+Koranteng Kwesi Kessie <kessiekoranteng88@gmail.com>
