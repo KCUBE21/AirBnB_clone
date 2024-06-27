@@ -1,12 +1,4 @@
 #!/usr/bin/python3
-"""
-model state class
-"""
-
-from models.base_model import BaseModel
-
-class State(BaseModel):
-    """State class that inherits from BaseModel"""#!/usr/bin/python3
 """ holds class State"""
 import models
 from models.base_model import BaseModel, Base
@@ -41,4 +33,3 @@ class State(BaseModel, Base):
                 if city.state_id == self.id:
                     list_city.append(city)
             return list_city
-    name = ""
